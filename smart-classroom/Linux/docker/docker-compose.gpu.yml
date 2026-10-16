@@ -30,11 +30,11 @@ services:
     group_add:
       - "${RENDER_GID}"
     volumes:
-      - ../components/vlm/config/startup-models.gpu.yaml:/opt/startup-models.yaml:ro
+      - ./components/vlm/config/startup-models.gpu.yaml:/opt/startup-models.yaml:ro
 
   ovms-provision:
     volumes:
-      - ../components/vlm/config/startup-models.gpu.yaml:/opt/startup-models.yaml:ro
+      - ./components/vlm/config/startup-models.gpu.yaml:/opt/startup-models.yaml:ro
 
   metrics-collector:
     devices:

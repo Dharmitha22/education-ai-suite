@@ -34,7 +34,7 @@ services:
 
   app:
     build:
-      context: ..
+      context: .
       dockerfile: docker/app.Dockerfile
       args:
         VITE_API_BASE_URL: "${VITE_API_BASE_URL:-}"
@@ -88,7 +88,7 @@ services:
 
   metrics-collector:   # telemetry sidecar: CPU/GPU/NPU/memory/power -> /metrics, /platform-info
     build:
-      context: ../performance-tools
+      context: ./performance-tools
       dockerfile: docker/Dockerfile
       args:
         HTTP_PROXY: "${HTTP_PROXY:-}"
@@ -130,7 +130,7 @@ services:
   audio-analyzer:   
     profiles: ["asr"]
     build:
-      context: ../edge-ai-libraries/microservices/audio-analyzer
+      context: ./edge-ai-libraries/microservices/audio-analyzer
       dockerfile: docker/Dockerfile
       args:
         INSTALL_CJK: "${INSTALL_CJK:-true}"
@@ -152,7 +152,7 @@ services:
       NO_PROXY: "${NO_PROXY:-}"
     volumes:
       # Editable service config (ASR provider/model/device, diarization).
-      - ../edge-ai-libraries/microservices/audio-analyzer/config.yaml:/app/audio_analyzer/config.yaml:ro
+      - ./edge-ai-libraries/microservices/audio-analyzer/config.yaml:/app/audio_analyzer/config.yaml:ro
       - audio-analyzer-models:/app/audio_analyzer/models
       - audio-analyzer-chunks:/app/audio_analyzer/chunks
       - audio-analyzer-storage:/app/audio_analyzer/storage
@@ -179,7 +179,7 @@ services:
   model-downloader:  
     profiles: ["text-gen"]
     build:
-      context: ../edge-ai-libraries/microservices/model-download
+      context: ./edge-ai-libraries/microservices/model-download
       dockerfile: docker/Dockerfile
       args:
         HTTP_PROXY: "${HTTP_PROXY:-}"
@@ -203,7 +203,7 @@ services:
       - TQDM_DISABLE=1
     volumes:
       - model-cache:/opt/models
-      - ../components/vlm/config/startup-models.yaml:/opt/startup-models.yaml:ro
+      - ./components/vlm/config/startup-models.yaml:/opt/startup-models.yaml:ro
     depends_on:
       model-cache-permissions: { condition: service_completed_successfully }
     ports:
@@ -220,7 +220,7 @@ services:
   ovms-provision:
     profiles: ["text-gen"]
     build:
-      context: ..
+      context: .
       dockerfile: docker/ovms-provision.Dockerfile
       args:
         HTTP_PROXY: "${HTTP_PROXY:-}"
@@ -233,7 +233,7 @@ services:
       - STARTUP_MODELS_CONFIG=/opt/startup-models.yaml
     volumes:
       - model-cache:/opt/models
-      - ../components/vlm/config/startup-models.yaml:/opt/startup-models.yaml:ro
+      - ./components/vlm/config/startup-models.yaml:/opt/startup-models.yaml:ro
     depends_on:
       model-cache-permissions: { condition: service_completed_successfully }
       model-downloader: { condition: service_healthy }
