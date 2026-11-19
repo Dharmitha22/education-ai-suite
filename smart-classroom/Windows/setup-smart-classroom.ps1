@@ -657,7 +657,7 @@ function Install-NPUDriver {
     $npuDriverPath = Join-Path $env:TEMP $npuDriverFileName
 
     Write-Host "  Intel NPU Driver version: $npuDriverVersion" -ForegroundColor Gray
-    Write-Host "  Supports: Core Ultra Series 1, 2, 3 (Meteor Lake, Arrow Lake, Lunar Lake, Panther Lake)" -ForegroundColor Gray
+    Write-Host "  Supports: Core Ultra Series 1, 2, 3 , 4 (Meteor Lake, Arrow Lake, Lunar Lake, Panther Lake, Nova Lake)" -ForegroundColor Gray
     Write-Host ""
 
     Write-Host "  Step 1: Downloading NPU Driver..." -ForegroundColor Yellow
