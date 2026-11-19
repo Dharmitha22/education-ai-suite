@@ -123,7 +123,7 @@ Options:
 
 System Requirements:
   - OS: Windows 11
-  - Processor: Intel Core Ultra Series 1, 2, or 3 (with iGPU)
+  - Processor: Intel Core Ultra Series 1, 2, 3 or 4 (with iGPU)
   - Memory: 32 GB RAM (minimum)
   - Storage: 50 GB free
   - Python: 3.12.x
